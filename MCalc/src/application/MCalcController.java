@@ -76,7 +76,7 @@ public class MCalcController {
 	@FXML
 	void onButtonClicked(ActionEvent e) {
 		if (flag == 1) {
-			str = "";
+			str = "";	//flag 0 のときは初期 1のときは計算済みなので今表示しているものを一度リセットする
 			flag = 0;
 		}
 		if (e.getSource().equals(button1)) {
@@ -105,10 +105,12 @@ public class MCalcController {
 
 		if (e.getSource().equals(buttonPlus)) {
 			if (now == 1) {
-				items[0].num = Integer.valueOf(str);
+				try{items[0].num = Integer.valueOf(str);
 				items[1].sign = Item.PLUS;
 				str = "";
-				now = 2;
+				now = 2;}catch(Exception ie) {
+					ie.printStackTrace();
+				}
 			} else if (now == 2) {
 				items[1].num = Integer.valueOf(str);
 				switch (items[1].sign) {
